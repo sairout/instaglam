@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instaglam</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Login-Form-Clean-1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div class="overlay"></div>
+    <div class="container-fluid header-top">
+        <div class="col-md-12" style="padding:0px;">
+            <div class="top-menu-logo"><img src="{% static 'img/logo.jpg' %}" class="center-block" style="height:40px;margin-top:10px;margin-bottom:10px;">
+                <div class="menu-buttons">
+                    <a class="btn btn-default" href="list" type="button"><i class="glyphicon glyphicon-search"></i></a>
+                    <a class="btn btn-default" href="upload/{{ user.id }}" type="button" id="upload-but"><i class="glyphicon glyphicon-upload"></i></a>
+                    <a class="btn btn-default" href="own-profile" type="button" id="profile-but"><i class="glyphicon glyphicon-user"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container img-container">
+        <div id="upload-div"></div>
+        {% for photo in photofeed %}
+        <div class="img-div">
+            {% if photo.owner_profilepic %}
+            <div class="header"><a href="feed_profile/{{ photo.owner }}"><img class="img-circle" src="{{ photo.owner_profilepic.url }}"></a>
+             {% else %}
+                <div class="header"><a href="feed_profile/{{ photo.owner }}"><img class="img-circle" src="{% static 'img/default.png' %}"></a>
+                    {% endif %}
+
+                    <div> <br><label style="padding-top:10px">{{ photo.owner }}</label></div>
+            </div><a href="photo/{{ photo.id }}"><img src="{{ photo.photo.url }}"></a>
+
+            <div class="more-section">
+                <br>
+                <label>{{ photo.likes }} Likes</label>
+
+                <label>{{ photo.comments }} Comments</label>
+                <p><strong>{{ photo.owner }}</strong>  {{ photo.caption }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$('#upload-but').click(function() {
+        $('#upload-div').toggle()
+        $('.overlay').toggle()
+    })
+</script>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    </div>
+</body>
+
+</html>

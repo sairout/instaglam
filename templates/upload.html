@@ -1,0 +1,39 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/upload.css' %}">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="container">
+<div class="col-md-6">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="form-group">
+        <label>Upload Image</label>
+        <div class="input-group">
+            <span class="input-group-btn">
+                <span class="btn btn-default btn-file">
+                    Browse… <input type="file" required name="photo" id="imgInp">
+                </span>
+            </span>
+            <input type="text" class="form-control" readonly>
+        </div>
+        <img id='img-upload'/>
+        <br>
+
+    </div>
+        <label>Add a caption</label>
+        <div class="input-group">
+            <input type="text" name="caption" style="width: 500px;">
+            </div>
+        <br>
+        <input class= "btn btn-primary" type="submit">
+    </form>
+    <a  href="/" class= "btn btn-danger" type="submit">cancel</a>
+
+</div>
+</div>
+<script src="{% static 'js/upload.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

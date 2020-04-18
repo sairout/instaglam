@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instaglam</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Login-Form-Clean-1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<style>
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 260px;
+  height: 240px;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+</style>
+<body>
+    <div class="overlay"></div>
+    <div class="container-fluid header-top">
+        <div class="col-md-12" style="padding:0px;">
+            <div class="top-menu-logo"><img src="{% static 'img/logo.jpg' %}" class="center-block" style="height:40px;margin-top:10px;margin-bottom:10px;">
+                <div class="menu-buttons">
+                    <a class="btn btn-default" href="/" type="button"><i class="glyphicon glyphicon-home"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-12 profile-imgs">
+            <div>
+                {% for instauser in instausers %}
+                <div class="gallery">
+                    <a  href="profile/{{ instauser.user.id }}">
+                        {% if instauser.profilepic %}
+                    <img src="{{ instauser.profilepic.url }}" alt="Cinque Terre" width="600" height="400">
+                        {% else %}
+                        <img src="{% static 'img/default.png' %}" alt="Cinque Terre" width="600" height="400">
+                        {% endif %}
+                    </a>
+                     <div class="desc">{{ instauser.user.username }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+$('#upload-but').click(function() {
+        $('#upload-div').toggle()
+        $('.overlay').toggle()
+    })
+</script>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>

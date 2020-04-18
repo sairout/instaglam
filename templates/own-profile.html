@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instaglam</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/ionicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Login-Form-Clean-1.css' %}">
+    <link rel="stylesheet" href="{% static 'css/Login-Form-Clean.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<style>
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 260px;
+  height: 240px;
+}
+
+div.desc {
+  padding: 15px;
+  text-align: center;
+}
+</style>
+<body>
+    <div class="overlay"></div>
+    <div class="container-fluid header-top">
+        <div class="col-md-12" style="padding:0px;">
+            <div class="top-menu-logo"><img src="{% static 'img/logo.jpg' %}" class="center-block" style="height:40px;margin-top:10px;margin-bottom:10px;">
+                <div class="menu-buttons">
+                    <a class="btn btn-default" href="logout" type="button" ><i class="glyphicon glyphicon-log-out"></i></a>
+                    <a class="btn btn-default" href="/" type="button" id="profile-but"><i class="glyphicon glyphicon-home"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container img-container">
+        <div id="upload-div"></div>
+    </div>
+    {% if instauser.profilepic %}
+    <div class="container"><a href="profilepic-upload/{{ instauser.user.id }}"><img class="img-circle center-block"  src="{{ instauser.profilepic.url }}" width="140" height="140"></a>
+        {% else %}
+        <div class="container"><a href="profilepic-upload/{{ instauser.user.id }}"><img class="img-circle center-block" src="{% static 'img/default.png' %}" width="140" height="140"></a>
+        {% endif %}
+        <h1 class="text-center">{{ user.username }}</h1>
+        <div class="col-md-12 profile-imgs">
+            <div>
+                {% for photo in photos %}
+                <div class="gallery">
+                    <a href="own_post_detail/{{ photo.id }}">
+                    <img src="{{ photo.photo.url }}" alt="Cinque Terre" width="600" height="400">
+                    </a>
+                     <div class="desc">{{ photo.caption }}</div>
+                    </div>
+                {% endfor %}
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
